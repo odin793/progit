@@ -590,7 +590,7 @@ Figure 5-15. Basic sequence of this managed-team workflow.
 
 Contributing to public projects is a bit different. Because you don’t have the permissions to directly update branches on the project, you have to get the work to the maintainers some other way. This first example describes contributing via forking on Git hosts that support easy forking. The repo.or.cz and GitHub hosting sites both support this, and many project maintainers expect this style of contribution. The next section deals with projects that prefer to accept contributed patches via e-mail.
 
-Сначала вы скорее всего захотите клонировать основной репозиторий, создать тематическую ветку одного или нескольких патчей, которые вы собрираетесь внести в проект, и выполнить здесь некоторую работу. Последовательность действий выглядит следующим образом:
+Сначала вы скорее всего захотите клонировать основной репозиторий, создать тематическую ветку одного или нескольких патчей, которые вы собираетесь внести в проект, и выполнить здесь некоторую работу. Последовательность действий выглядит следующим образом:
 
 First, you’ll probably want to clone the main repository, create a topic branch for the patch or patch series you’re planning to contribute, and do your work there. The sequence looks basically like this:
 
@@ -612,7 +612,7 @@ When your branch work is finished and you’re ready to contribute it back to th
 
 	$ git remote add myfork (url)
 
-Свои наработки вы должны выкладывать в этот репозиторий. Гораздо проще добавить ветку, над которой вы работаете, как удаленную в ваш репозиторий, чем сливать ее в вашу ветку master и выкладывать. Это объясняется тем следующим образом — если ваша работа не принята или частично отобрана вы не должны перематывать вашу ветку master. Если мейнтейнеры выполняют слияние, перемещение или частично отбирают вашу работу, вы, в конечном счете, можете получить ее обратно скачивая (pulling) из их репозитория:
+Свои наработки вы должны выкладывать в этот репозиторий. Гораздо проще добавить в ваш репозиторий ветку, над которой вы работаете, как удаленную, чем сливать ее в вашу ветку master и выкладывать. Это объясняется тем следующим образом — если ваша работа не принята или частично отобрана вы не должны перематывать вашу ветку master. Если мейнтейнеры выполняют слияние, перемещение или частично отбирают вашу работу, вы, в конечном счете, можете получить ее обратно скачивая (pulling) из их репозитория:
 
 You need to push your work up to it. It’s easiest to push the remote branch you’re working on up to your repository, rather than merging into your master branch and pushing that up. The reason is that if the work isn’t accepted or is cherry picked, you don’t have to rewind your master branch. If the maintainers merge, rebase, or cherry-pick your work, you’ll eventually get it back via pulling from their repository anyhow:
 
@@ -622,7 +622,7 @@ You need to push your work up to it. It’s easiest to push the remote branch yo
 
 When your work has been pushed up to your fork, you need to notify the maintainer. This is often called a pull request, and you can either generate it via the website — GitHub has a "pull request" button that automatically messages the maintainer — or run the `git request-pull` command and e-mail the output to the project maintainer manually.
 
-Команда `request-pull` принимает в качестве аргумента название базовой ветки, в которую вы хотите включить вашу работу, и URL репозитория, из которого эти наработки могут быть получены. Команда выводит в список всех изменений, которые вы простие включить в проект. Например, если Джессика хочет послать Джону pull request когда она сделала пару коммитов в тематической ветке, которую она только что выложила, ей следует выполнить:
+Команда `request-pull` принимает в качестве аргумента название базовой ветки, в которую вы хотите включить вашу работу, и URL репозитория, из которого эти наработки могут быть получены. Команда выводит в список всех изменений, которые вы просите включить в проект. Например, если Джессика хочет послать Джону pull request когда она сделала пару коммитов в тематической ветке, которую она только что выложила, ей следует выполнить:
 
 The `request-pull` command takes the base branch into which you want your topic branch pulled and the Git repository URL you want them to pull from, and outputs a summary of all the changes you’re asking to be pulled in. For instance, if Jessica wants to send John a pull request, and she’s done two commits on the topic branch she just pushed up, she can run this:
 
@@ -666,7 +666,7 @@ Insert 18333fig0516.png
  
 Figure 5-16. Initial commit history with featureB work.
 
-Давайте представим, что мейнтейнер проекта включил в основную версию группу патчей. Далее он попытается включить вашу первую ветку, но слияине уже не проходит гладко. В этом случае вы можете попробовать переместить эту ветку на верхушку ветки `origin/master`, разрешить конфликты для мейнтейнера и, затем, заново предложить ваши изменения:
+Давайте представим, что мейнтейнер проекта включил в основную версию группу патчей. Далее он попытается включить вашу первую ветку, но слияние уже не проходит гладко. В этом случае вы можете попробовать переместить эту ветку на верхушку ветки `origin/master`, разрешить конфликты для мейнтейнера и, затем, заново предложить ваши изменения:
 
 Let’s say the project maintainer has pulled in a bunch of other patches and tried your first branch, but it no longer cleanly merges. In this case, you can try to rebase that branch on top of `origin/master`, resolve the conflicts for the maintainer, and then resubmit your changes:
 
