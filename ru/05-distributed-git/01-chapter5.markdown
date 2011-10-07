@@ -427,7 +427,7 @@ In this next scenario, you’ll look at contributor roles in a larger private gr
 
 Let’s say that John and Jessica are working together on one feature, while Jessica and Josie are working on a second. In this case, the company is using a type of integration-manager workflow where the work of the individual groups is integrated only by certain engineers, and the `master` branch of the main repo can be updated only by those engineers. In this scenario, all work is done in team-based branches and pulled together by the integrators later.
 
-Давайте рассмотрим рабочий процесс Джессики, которая работает над двумя задачами и, таким образом, одновременно принимает участие в работе с двумя другими разработчиками. Полагая, что она уже имеет ее собственную копию репозитория, Джессика решает сначала взяться задачу `featureA`. Для этого она создает новую ветку и выполняет на ней некоторую работу:
+Давайте рассмотрим рабочий процесс Джессики, которая работает над двумя задачами и, таким образом, одновременно принимает участие в работе с двумя другими разработчиками. Полагая, что она уже имеет ее собственную копию репозитория, Джессика решает сначала взяться за задачу `featureA`. Для этого она создает новую ветку и выполняет на ней некоторую работу:
 
 Let’s follow Jessica’s workflow as she works on her two features, collaborating in parallel with two different developers in this environment. Assuming she already has her repository cloned, she decides to work on `featureA` first. She creates a new branch for the feature and does some work on it there:
 
@@ -475,7 +475,7 @@ Now, Jessica makes a couple of commits on the `featureB` branch:
 Jessica’s repository looks like Figure 5-12.
 
 Insert 18333fig0512.png 
-Рисунок 5-12. Начальная история окммитов Джессики.
+Рисунок 5-12. Начальная история коммитов Джессики.
 
 Figure 5-12. Jessica’s initial commit history.
 
@@ -498,7 +498,7 @@ Jessica can now merge this into the work she did with `git merge`:
 	 lib/simplegit.rb |    4 ++++
 	 1 files changed, 4 insertions(+), 0 deletions(-)
 
-Есть небольшая проблема — ей нужно выложить изменения из ее ветки `featureB` в ветку `featureBee` на сервере. Она может сделать это при помощи команды `git push`, поочередно указывая название локальной и удаленной веток, разделенные знаком двоеточия:
+Есть небольшая проблема — ей нужно выложить изменения из ее ветки `featureB` в ветку `featureBee` на сервере. Она может сделать это при помощи команды `git push`, последовательно указывая название локальной и удаленной веток, разделенные знаком двоеточия:
 
 There is a bit of a problem — she needs to push the merged work in her `featureB` branch to the `featureBee` branch on the server. She can do so by specifying the local branch followed by a colon (:) followed by the remote branch to the `git push` command:
 
@@ -564,7 +564,7 @@ Insert 18333fig0513.png
 
 Figure 5-13. Jessica’s history after committing on a feature branch.
 
-Джессика, Джози и Джон информируют менеджеров по интеграции, что ветки `featureA` и `featureBee` на сервере готовы к внесению в основную версию разработки. После того, как они вносят эти ветки в основную версию, извлечение данных с сервера (fetch) приведет к появлению новых коммитов слияния. Таким образом, история коммитов станет выглядеть как на Рисунке 5-14.
+Джессика, Джози и Джон информируют менеджеров по интеграции, что ветки `featureA` и `featureBee` на сервере готовы к внесению в основную версию разработки. После того, как они внесут эти ветки в основную версию, извлечение данных с сервера (fetch) приведет к появлению новых коммитов слияния. Таким образом, история коммитов станет выглядеть как на Рисунке 5-14.
 
 Jessica, Josie, and John inform the integrators that the `featureA` and `featureBee` branches on the server are ready for integration into the mainline. After they integrate these branches into the mainline, a fetch will bring down the new merge commits, making the commit history look like Figure 5-14. 
 
