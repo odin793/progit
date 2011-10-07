@@ -207,7 +207,7 @@ In the following examples, and throughout most of this book, for the sake of bre
 
 The simplest setup you’re likely to encounter is a private project with one or two other developers. By private, I mean closed source — not read-accessible to the outside world. You and the other developers all have push access to the repository.
 
-В этом окружении вы можете последовать рабочему процессу, похожему на тот, который вы использовали бы в Subversion или другой централизованной системе. Вы по-прежнему получаете такие преимущества, как локальные коммиты (коммиты в offline) и возможность гораздо более простого ветвления и слияния, но сам рабочий процесс может быть очень похожим; главное отличие — во время выполнения коммита слияние происходит на стороне клиента, а не на сервере.
+В этом окружении вы можете последовать рабочему процессу, похожему на тот, который вы использовали бы в Subversion или другой централизованной системе. Вы по-прежнему получаете такие преимущества, как локальные коммиты (коммиты в offline) и возможность гораздо более простого ветвления и слияния, но сам рабочий процесс может оставаться очень похожим; главное отличие — во время выполнения коммита слияние происходит на стороне клиента, а не на сервере.
 Давайте посмотрим, как это может выглядеть, когда два разработчика начинают работать вместе с общим репозиторием. Первый разработчик, Джон, клонирует репозиторий, делает изменения, выполняет локальный коммит. (Я заменяю служебные сообщения знаком `...` в этих примерах, чтобы немного их сократить.)
 
 In this environment, you can follow a workflow similar to what you might do when using Subversion or another centralized system. You still get the advantages of things like offline committing and vastly simpler branching and merging, but the workflow can be very similar; the main difference is that merges happen client-side rather than on the server at commit time.
@@ -350,7 +350,7 @@ Jessica thinks her topic branch is ready, but she wants to know what she has to 
 
 	    removed invalid default value
 
-Теперь Джессика может слить свою тематическую ветку с ее основной веткой, слить работу Джона (`origin/master`) с ее веткой `master`, и, затем, опять отправить изменения на сервер. Сначала она переключается на свою основную ветку, чтобы объединить всю эту работу:
+Теперь Джессика может слить свою тематическую ветку с ее основной веткой, слить работу Джона (`origin/master`) с ее веткой `master` и, затем, отправить изменения на сервер. Сначала она переключается на свою основную ветку, чтобы объединить всю эту работу:
 
 Now, Jessica can merge her topic work into her master branch, merge John’s work (`origin/master`) into her `master` branch, and then push back to the server again. First, she switches back to her master branch to integrate all this work:
 
@@ -358,7 +358,7 @@ Now, Jessica can merge her topic work into her master branch, merge John’s wor
 	Switched to branch "master"
 	Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
 
-Сначала она может слить ветку `origin/master` или `issue54` — обе они находятся выше в истории коммитов, так что не важно какой порядок слияния она выберет. Конечное состояние репозитория должно быть идентично независимо от того, какой порядок слияния она выбрала; только история комимтов будет немного разная. Сначала она выполняет слияние для ветки `issue54`:
+Сначала она может слить ветку `origin/master` или `issue54` — обе они находятся выше в истории коммитов, так что не важно какой порядок слияния она выберет. Конечное состояние репозитория должно быть идентично независимо от того, какой порядок слияния она выбрала; только история коммитов будет немного разная. Сначала она выполняет слияние для ветки `issue54`:
 
 She can merge either `origin/master` or `issue54` first — they’re both upstream, so the order doesn’t matter. The end snapshot should be identical no matter which order she chooses; only the history will be slightly different. She chooses to merge in `issue54` first:
 
@@ -369,7 +369,7 @@ She can merge either `origin/master` or `issue54` first — they’re both upstr
 	 lib/simplegit.rb |    6 +++++-
 	 2 files changed, 6 insertions(+), 1 deletions(-)
 
-Никаких проблем не возникает; как вы видите, это был обычный fast-forward. Теперь Джессика выполняет слияние работы Джона (`origin/master`):
+Никаких проблем не возникает; как вы видите, это был обычный fast-forward. Теперь Джессика выполняет слияние с работой Джона (`origin/master`):
 
 No problems occur; as you can see it, was a simple fast-forward. Now Jessica merges in John’s work (`origin/master`):
 
@@ -411,7 +411,7 @@ Figure 5-10. Jessica’s history after pushing all changes back to the server.
 That is one of the simplest workflows. You work for a while, generally in a topic branch, and merge into your master branch when it’s ready to be integrated. When you want to share that work, you merge it into your own master branch, then fetch and merge `origin/master` if it has changed, and finally push to the `master` branch on the server. The general sequence is something like that shown in Figure 5-11.
 
 Insert 18333fig0511.png
-Рисунок 5-11. Общая последовательность событий для простого рабочего процесса в Git с несколькими разработчиками.
+Рисунок 5-11. Общая последовательность событий для простого рабочего процесса в Git'е с несколькими разработчиками.
  
 Figure 5-11. General sequence of events for a simple multiple-developer Git workflow.
 
