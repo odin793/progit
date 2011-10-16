@@ -718,7 +718,7 @@ Figure 5-18. Commit history after featureBv2 work.
 
 Many larger projects have established procedures for accepting patches — you’ll need to check the specific rules for each project, because they will differ. However, many larger public projects accept patches via a developer mailing list, so I’ll go over an example of that now.
 
-Рабочий процесс похож на описанный ранее — вы создаете тематическую ветку для каждой серии патчей, над которой вы работаете. Отличие состоит в процессе внесения этих изменений в проект. Вместо того, чтобы создавать ответвление от проекта (forking) и отправлять наработки в ваш собственый репозиторий (для которого вы имеете право записи), вы генерируете e-mail версию каждой серии коммитов и отправляете ее по списку адресов разработчиков:
+Рабочий процесс похож на описанный ранее — вы создаете тематическую ветку для каждой серии патчей, над которой вы работаете. Отличие состоит в процессе внесения этих изменений в проект. Вместо того, чтобы создавать ответвление от проекта (forking) и отправлять наработки в ваш собственный репозиторий (для которого вы имеете право записи), вы генерируете e-mail версию каждой серии коммитов и отправляете ее по списку адресов разработчиков:
 
 The workflow is similar to the previous use case — you create topic branches for each patch series you work on. The difference is how you submit them to the project. Instead of forking the project and pushing to your own writable version, you generate e-mail versions of each commit series and e-mail them to the developer mailing list:
 
@@ -728,7 +728,7 @@ The workflow is similar to the previous use case — you create topic branches f
 	$ (work)
 	$ git commit
 
-Теперь у вас есть два коммита, которые вы хотите отправить по списку адресов. Вы используете команду `git format-patch`, чтобы сгенерировать файлы в формате mbox, которые вы можете отправить по почте по списку адресов. Эта команда превращает каждый коммит в электронное сообшение, темой которого является первая строка сообщения коммита, а оставшаяся часть сообщения коммита и патч, который он представляет, являются телом электронного сообщения. Хорошей особенностью является то, что применение патча из сгененрированного командой `format-patch` электронного сообщения сохраняет всю информацию о коммите. Вы увидите это в следующей части, когда будете применять эти коммиты:
+Теперь у вас есть два коммита, которые вы хотите отправить по списку адресов. Вы используете команду `git format-patch`, чтобы сгенерировать файлы в формате mbox, которые вы можете отправить по почте по списку адресов. Эта команда превращает каждый коммит в электронное сообщение, темой которого является первая строка сообщения коммита, а оставшаяся часть сообщения коммита и патч, который он представляет, являются телом электронного сообщения. Хорошей особенностью является то, что применение патча из сгенерированного командой `format-patch` электронного сообщения сохраняет всю информацию о коммите. Вы увидите это в следующей части, когда будете применять эти коммиты:
 
 Now you have two commits that you want to send to the mailing list. You use `git format-patch` to generate the mbox-formatted files that you can e-mail to the list — it turns each commit into an e-mail message with the first line of the commit message as the subject and the rest of the message plus the patch that the commit introduces as the body. The nice thing about this is that applying a patch from an e-mail generated with `format-patch` preserves all the commit information properly, as you’ll see more of in the next section when you apply these commits:
 
@@ -768,11 +768,11 @@ The `format-patch` command prints out the names of the patch files it creates. T
 	-- 
 	1.6.2.rc1.20.g8c5b.dirty
 
-Вы также можете отредактировать эти файлы патчей, чтобы добавить в электронное сообщение некую информацию, которую вы не хотите показывать в сообщении коммита. Если вы добавляете текст мужду строкой `--` и началом патча (строка `lib/simplegit.rb`), то разработчик сможет ее прочитать, но в применении патча она учавствовать не будет.
+Вы также можете отредактировать эти файлы патчей, чтобы добавить в электронное сообщение некую информацию, которую вы не хотите показывать в сообщении коммита. Если вы добавляете текст между строкой `--` и началом патча (строка `lib/simplegit.rb`), то разработчик сможет ее прочитать, но в применении патча она участвовать не будет.
 
 You can also edit these patch files to add more information for the e-mail list that you don’t want to show up in the commit message. If you add text between the `--` line and the beginning of the patch (the `lib/simplegit.rb` line), then developers can read it; but applying the patch excludes it.
 
-Чтобы отправить эти файлы по списку адресов вы можете вставить файл в сообщение в вашем почтовом клиенте или отправить его через программу в командной строке. Вставка текста часто приводит к ошибкам форматирования, особенно в "умных" клиентах, которые не защищают символы перевода строки и пробельные символы. К счастью, Git предоставляет инструмент, позволяющий вам передавать через IMAP правильно отформатированные патчи. Применение этого инструмента может быть легче для вас. Я покажу как отсылать патчи через Gmail, так как именно этот агент я и использую; вы можете прочесть подробные инструкции для большого числа почтовых программ в вышеупомянутом файле `Documentation/SubmittingPatches`, находящемся в исходном коде Git'а.
+Чтобы отправить эти файлы по списку адресов вы можете вставить файл в сообщение в вашем почтовом клиенте или отправить его через программу в командной строке. Вставка текста часто приводит к ошибкам форматирования, особенно в "умных" клиентах, которые не защищают символы перевода строки и пробельные символы. К счастью, Git предоставляет инструмент, позволяющий вам передавать через IMAP правильно отформатированные патчи. Для вас, применение этого инструмента может быть легче. Я покажу как отсылать патчи через Gmail, так как именно этот агент я и использую; вы можете прочесть подробные инструкции для большого числа почтовых программ в вышеупомянутом файле `Documentation/SubmittingPatches`, находящемся в исходном коде Git'а.
 
 To e-mail this to a mailing list, you can either paste the file into your e-mail program or send it via a command-line program. Pasting the text often causes formatting issues, especially with "smarter" clients that don’t preserve newlines and other whitespace appropriately. Luckily, Git provides a tool to help you send properly formatted patches via IMAP, which may be easier for you. I’ll demonstrate how to send a patch via Gmail, which happens to be the e-mail agent I use; you can read detailed instructions for a number of mail programs at the end of the aforementioned `Documentation/SubmittingPatches` file in the Git source code.
 
@@ -788,7 +788,7 @@ First, you need to set up the imap section in your `~/.gitconfig` file. You can 
 	  port = 993
 	  sslverify = false
 
-Если ваш IMAP сервер не использует SSL, две последние строки могут отсутствовать, а значение host будет `imap://` вместо `imaps://`. Когда необходимые параметры внесены в ваш файл конфигурации, вы можете использовать команду `git send-email` для перемещение серии патчей в папку Drafts на указанном IMAP сервере:
+Если ваш IMAP сервер не использует SSL, две последние строки могут отсутствовать, а параметр host примет значение `imap://` вместо `imaps://`. Когда необходимые параметры внесены в ваш файл конфигурации, вы можете использовать команду `git send-email` для перемещение серии патчей в папку Drafts на указанном IMAP сервере:
 
 If your IMAP server doesn’t use SSL, the last two lines probably aren’t necessary, and the host value will be `imap://` instead of `imaps://`.
 When that is set up, you can use `git send-email` to place the patch series in the Drafts folder of the specified IMAP server:
@@ -801,7 +801,7 @@ When that is set up, you can use `git send-email` to place the patch series in t
 	Who should the emails be sent to? jessica@example.com
 	Message-ID to be used as In-Reply-To for the first email? y
 
-Затем Git разделяет на части блок лог-информации, выглядещей примерно следующим образом, для каждого патча, который вы отсылаете: 
+Затем Git выдает группу служебных сообщений, выглядящую примерно следующим образом, для каждого патча, который вы отсылаете: 
 
 Then, Git spits out a bunch of log information looking something like this for each patch you’re sending:
 
@@ -824,7 +824,11 @@ Then, Git spits out a bunch of log information looking something like this for e
 
 At this point, you should be able to go to your Drafts folder, change the To field to the mailing list you’re sending the patch to, possibly CC the maintainer or person responsible for that section, and send it off.
 
+### Итоги ###
+
 ### Summary ###
+
+В этом разделе был рассмотрен ряд общепринятых рабочих процессов, применяемых в нескольких непохожих друг на друга типах проектов (использующих Git), c которыми вы вероятно столкнетесь. Также здесь были представлены два новых инструмента, призванных помочь вам в организации этих процессов. Далее вы увидите рабочий процесс совсем с другой стороны: управление проектом в Git. Вы научитесь роли благосклонного диктатора или роли менеджера по интеграции.
 
 This section has covered a number of common workflows for dealing with several very different types of Git projects you’re likely to encounter and introduced a couple of new tools to help you manage this process. Next, you’ll see how to work the other side of the coin: maintaining a Git project. You’ll learn how to be a benevolent dictator or integration manager.
 
