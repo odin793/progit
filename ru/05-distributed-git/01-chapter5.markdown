@@ -12,7 +12,7 @@ In this chapter, you’ll see how to work with Git in a distributed environment 
 ## Распределенные рабочие процессы ##
 ## Distributed Workflows ##
 
-В отличии от централизованных систем контроля версий, распределенная природа Git-а позволяет вам быть гораздо более гибким в отношении участия разработчика в работе над проектом. В централизованных системах, каждый разработчик является узлом сети, работающим в более или менее равной степени на центральном хабе. В Git, однако, каждый разработчик потенциально является и узлом и хабом (концентратором) — то есть каждый разработчик может и вносить код в другие репозитории и содержать публичный репозиторий, основываясь на котором могут работать другие разработчики и в который они могут вносить свои изменения. Это открывает широкие возможности по ведению рабочего процесса для вас и и/или для вашей команды, так что я рассмотрю несколько распространенных парадигм, которые используют преимущества такой гибкости. Я рассмотрю сильные стороны и возможные слабые места каждой из моделей; вы можете выбрать одну из них, а можете сочетать и совмещать особенности каждой.
+В отличии от централизованных систем контроля версий, распределенная природа Git-а позволяет вам быть гораздо более гибким в отношении участия разработчика в работе над проектом. В централизованных системах, каждый разработчик является узлом сети, работающим в более или менее равной степени на центральном хабе. В Git, однако, каждый разработчик потенциально является и узлом и хабом (концентратором) — то есть каждый разработчик может и вносить код в другие репозитории и содержать публичный репозиторий, основываясь на котором могут работать другие разработчики и в который они могут вносить свои изменения. Это открывает широкие возможности по ведению рабочего процесса для вас и/или для вашей команды, так что я рассмотрю несколько распространенных парадигм, которые используют преимущества такой гибкости. Я рассмотрю сильные стороны и возможные слабые места каждой из моделей; вы можете выбрать одну из них, а можете сочетать и совмещать особенности каждой.
 
 Unlike Centralized Version Control Systems (CVCSs), the distributed nature of Git allows you to be far more flexible in how developers collaborate on projects. In centralized systems, every developer is a node working more or less equally on a central hub. In Git, however, every developer is potentially both a node and a hub — that is, every developer can both contribute code to other repositories and maintain a public repository on which others can base their work and which they can contribute to. This opens a vast range of workflow possibilities for your project and/or your team, so I’ll cover a few common paradigms that take advantage of this flexibility. I’ll go over the strengths and possible weaknesses of each design; you can choose a single one to use, or you can mix and match features from each.
 
@@ -32,14 +32,14 @@ Figure 5-1. Centralized workflow.
 
 This means that if two developers clone from the hub and both make changes, the first developer to push their changes back up can do so with no problems. The second developer must merge in the first one’s work before pushing changes up, so as not to overwrite the first developer’s changes. This concept is true in Git as it is in Subversion (or any CVCS), and this model works perfectly in Git.
 
-Если вы имеете небольшую команду или уже комфортно чувствуете себя при применении централизованного рабочего процесса в вашей компании или команде, вы можете запросто продолжить использовать такой рабочий процесс в Git. Просто настройте один репозиторий и дайте каждому в вашей команде право записи (push access); Git не позволить пользователям перезаписывать наработки друг-друга. Если один разработчик выполняет клонирование, делает изменения, а затем пытается выложить эти изменения, в то время как другой разработчик уже успел выложить свои, сервер отклонит изменения этого разработчика. Ему будет сказано, что он пытается выложить изменения, для которых невозможно выполнить fast-forward и что надо сначала извлечь данные с сервера, выполнить слияние, а уже потом выкладывать свои изменения. Этот рабочий процесс привлекателен для большого количества людей, так как это та парадигма, с которой многие знакомы и которая многим понятна.
+Если вы имеете небольшую команду или уже комфортно чувствуете себя при применении централизованного рабочего процесса в вашей компании или команде, вы можете запросто продолжить использовать такой рабочий процесс в Git. Просто настройте один репозиторий и дайте каждому в вашей команде право записи (push access); Git не позволит пользователям перезаписывать наработки друг-друга. Если один разработчик выполняет клонирование, делает изменения, а затем пытается выложить эти изменения, в то время как другой разработчик уже успел выложить свои, сервер отклонит изменения этого разработчика. Ему будет сказано, что он пытается выложить изменения, для которых невозможно выполнить fast-forward и что надо сначала извлечь данные с сервера, выполнить слияние, а уже потом выкладывать свои изменения. Этот рабочий процесс привлекателен для большого количества людей, так как это та парадигма, с которой многие знакомы и которая многим понятна.
 
 If you have a small team or are already comfortable with a centralized workflow in your company or team, you can easily continue using that workflow with Git. Simply set up a single repository, and give everyone on your team push access; Git won’t let users overwrite each other. If one developer clones, makes changes, and then tries to push their changes while another developer has pushed in the meantime, the server will reject that developer’s changes. They will be told that they’re trying to push non-fast-forward changes and that they won’t be able to do so until they fetch and merge. This workflow is attractive to a lot of people because it’s a paradigm that many are familiar and comfortable with.
 
 ### Рабочий процесс с менеджером по интеграции ###
 ### Integration-Manager Workflow ###
 
-Так как Git позволяет вам иметь несколько удаленных репозиториев, существует возможность ведения рабочего процесса, когда каждый разработчик имеет право записи на свой собственный публичный репозиторий и право на чтение для всех остальных. Этот сценарий часто подразумевает существование канонического (основного) репозитория, который представляет "официальный" проект. Чтобы поучаствовать этом проекте, вы создаете вашу собственную публичную копию этого проекта и выкладываете туда свои изменения. Потом вы можете отправить запрос владельцу основного проекта на внесение в него ваших изменений. Он может добавить ваш репозиторий как удаленный, протестировать локально ваши изменения, слить их со своей веткой и затем выложить обратно в публичный репозиторий. Этот процесс работает как описано далее (смотри Рисунок 5-2):
+Так как Git позволяет вам иметь несколько удаленных репозиториев, существует возможность ведения рабочего процесса, когда каждый разработчик имеет право записи на свой собственный публичный репозиторий и право на чтение для всех остальных. Этот сценарий часто подразумевает существование канонического (основного) репозитория, который представляет "официальный" проект. Чтобы поучаствовать в этом проекте, вы создаете вашу собственную публичную копию этого проекта и выкладываете туда свои изменения. Потом вы можете отправить запрос владельцу основного проекта на внесение в него ваших изменений. Он может добавить ваш репозиторий как удаленный, протестировать локально ваши изменения, слить их со своей веткой и затем выложить обратно в публичный репозиторий. Этот процесс работает как описано далее (смотри Рисунок 5-2):
 
 Because Git allows you to have multiple remote repositories, it’s possible to have a workflow where each developer has write access to their own public repository and read access to everyone else’s. This scenario often includes a canonical repository that represents the "official" project. To contribute to that project, you create your own public clone of the project and push your changes to it. Then, you can send a request to the maintainer of the main project to pull in your changes. They can add your repository as a remote, test your changes locally, merge them into their branch, and push back to their repository. The process works as follow (see Figure 5-2):
 
@@ -832,20 +832,33 @@ At this point, you should be able to go to your Drafts folder, change the To fie
 
 This section has covered a number of common workflows for dealing with several very different types of Git projects you’re likely to encounter and introduced a couple of new tools to help you manage this process. Next, you’ll see how to work the other side of the coin: maintaining a Git project. You’ll learn how to be a benevolent dictator or integration manager.
 
+## Управление проектом ##
+
 ## Maintaining a Project ##
+
+В дополнении к тому, как эффективно работать над проектов, вам наверняка необходимо также знать как самому управлять им. Управление проектом может заключаться в принятии патчей, сгенерированных с помощью 'format-patch' и отправленных вам по почте или в интеграции изменений в ветки удаленных репозиториев. Неважно, управляете ли вы главным репозитарием проекта или хотите помочь с проверкой или включением патчей, вам необходимо выработать метод приема подобных патчей, который будет наиболее доступным для других участников и не будет изменяться вами в течении длительного срока.
 
 In addition to knowing how to effectively contribute to a project, you’ll likely need to know how to maintain one. This can consist of accepting and applying patches generated via `format-patch` and e-mailed to you, or integrating changes in remote branches for repositories you’ve added as remotes to your project. Whether you maintain a canonical repository or want to help by verifying or approving patches, you need to know how to accept work in a way that is clearest for other contributors and sustainable by you over the long run.
 
+### Работа с тематическими ветками ###
+
 ### Working in Topic Branches ###
+
+Когда вы решаете интегрировать новую разработку хорошей идеей является опробовать разработку в тематической ветке - временной ветке, специально созданной для теста. Таким образом становится легко изменять код данной разработки, не затрагивая весь проект целиком(всегда можно приостановить разработку нового функционала и вернуться к ней позднее). Если вы выбираете простое имя для ветки, созданное на базе того, над чем вы именно работаете, например, 'ruby_client', или что-то аналогичное по описанию, то вы сможете легко вспомнить, зачем нужна данная ветка, если вдруг вам придется отложить работу над данным функционалом и вернуться к ней позднее. Управляющий проектом, как правило, создает ветки с указанием пространства имен - к примеру, 'sc/ruby_client', где 'sc' является, допустим, никнеймом автора вносимых изменений.
+Как вы уже знаете, вы можете создать ветку, основанную на вашей главной ветке, следующим образом:
 
 When you’re thinking of integrating new work, it’s generally a good idea to try it out in a topic branch — a temporary branch specifically made to try out that new work. This way, it’s easy to tweak a patch individually and leave it if it’s not working until you have time to come back to it. If you create a simple branch name based on the theme of the work you’re going to try, such as `ruby_client` or something similarly descriptive, you can easily remember it if you have to abandon it for a while and come back later. The maintainer of the Git project tends to namespace these branches as well — such as `sc/ruby_client`, where `sc` is short for the person who contributed the work. 
 As you’ll remember, you can create the branch based off your master branch like this:
 
 	$ git branch sc/ruby_client master
 
+Или, если вы хотите немедленно переключиться на создаваемую ветку, вы можете использовать опцию `checkout -b`:
+
 Or, if you want to also switch to it immediately, you can use the `checkout -b` option:
 
 	$ git checkout -b sc/ruby_client master
+
+Теперь вы готовы к тому, чтобы принять изменения в данную временную тематическую ветку и определить, хотите ли вы влить ее в ваши "более постоянные" ветки.
 
 Now you’re ready to add your contributed work into this topic branch and determine if you want to merge it into your longer-term branches.
 
@@ -1159,6 +1172,6 @@ It’s time to e-mail your mailing list of people who want to know what’s happ
 
 You get a clean summary of all the commits since v1.0.1, grouped by author, that you can e-mail to your list.
 
-## Summary ##
+## Итоги ##
 
 You should feel fairly comfortable contributing to a project in Git as well as maintaining your own project or integrating other users’ contributions. Congratulations on being an effective Git developer! In the next chapter, you’ll learn more powerful tools and tips for dealing with complex situations, which will truly make you a Git master.
